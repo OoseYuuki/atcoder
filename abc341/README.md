@@ -35,3 +35,43 @@ for i in range(N-1):
 
 print(A_list[-1])
 ```
+
+### C問題（`Takahachi Gets Lost`）
+- 問題
+[![Image from Gyazo](https://i.gyazo.com/0960282c5dba1d3cafceca620480c54e.png)](https://gyazo.com/0960282c5dba1d3cafceca620480c54e)
+
+
+探索メソッド`search`を作って必要な変数を代入して実行するというロジック。
+
+TLEだが、なぜTLEなのかわからない、、、
+
+```python
+H, W, N = list(map(int, input().split()))
+T_list = list(input())
+S_list = [list(input()) for _ in range(H)]
+
+
+def search(x, y, S, T):
+    for t in T:
+        if t == 'L':
+            x -= 1
+        elif t == 'R':
+            x += 1
+        elif t == 'U':
+            y -= 1
+        elif t == 'D':
+            y += 1
+
+        if S[y][x] == '#':
+            return 0
+    return 1
+
+
+answer = 0
+for y in range(H):
+    for x in range(W):
+        if S_list[y][x] == '.':
+            answer += search(x, y, S_list, T_list)
+
+print(answer)
+```
